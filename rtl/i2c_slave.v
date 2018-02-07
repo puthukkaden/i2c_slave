@@ -9,16 +9,16 @@ and receiver that supports the I2C protocol defined as per the document:
 
 module i2c_slave()
 (
-	input		wire	sys_clk,
+  input   wire  sys_clk,
 
-	output	wire	SCL,
-	output	wire	SDA,
+  inout   wire  SCL,
+  inout   wire  SDA,
 
-	input		wire	InputDataValid,
-	input		reg		TxData,
+  input   wire  InputDataValid,
+  input   reg   TxData,
 
-	output	reg		OutputDataValid,
-	output	reg		RxData
+  output  reg   OutputDataValid,
+  output  reg   RxData
 );
 
 parameter FsmStateNumber = 8;
@@ -33,14 +33,14 @@ state_TxData
 state_TxAckWait
 */
 
-parameter state_Idle				= 8'b0000_0001,
-					state_RxSlaveAddr	= 8'b0000_0010,
-					state_AckAddr			= 8'b0000_0100,
-					state_RxData			= 8'b0000_1000,
-					state_AckData			= 8'b0001_0000,
-					state_NackData		= 8'b0010_0000,
-					state_TxData			= 8'b0100_0000,
-					state_TxAckWait		= 8'b1000_0000;
+parameter state_Idle        = 8'b0000_0001,
+          state_RxSlaveAddr = 8'b0000_0010,
+          state_AckAddr     = 8'b0000_0100,
+          state_RxData      = 8'b0000_1000,
+          state_AckData     = 8'b0001_0000,
+          state_NackData    = 8'b0010_0000,
+          state_TxData      = 8'b0100_0000,
+          state_TxAckWait   = 8'b1000_0000;
 
 reg [FsmStateNumber-1:0] CurrentState, NextState;
 
